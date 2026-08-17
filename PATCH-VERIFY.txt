@@ -1,0 +1,8 @@
+V.90 Phase-2 v5 FAST PATCH - corrected flat archive
+
+After extraction into v92isp-complete, verify in CMD:
+  findstr /C:"CRC-valid analogue INFO0a received" src\live_modem.cpp
+  findstr /C:"Phase 2 timed out" src\live_modem.cpp
+
+The first command MUST find a line.
+The second command MUST print nothing.

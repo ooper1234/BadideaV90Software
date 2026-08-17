@@ -1,0 +1,54 @@
+v92isp COMPLETE NATIVE WINDOWS QUICK START
+============================================
+
+1. Extract the ZIP to a fresh folder, for example:
+   C:\Users\nipit\Downloads\v92isp-windows-complete
+
+2. Open Command Prompt or PowerShell AS ADMINISTRATOR in that folder.
+
+3. Run:
+
+   START-V92ISP-WINDOWS.cmd
+
+   or:
+
+   powershell -ExecutionPolicy Bypass -File .\windows\Setup-And-Start.ps1
+
+The first run builds PJSIP 2.17, stages official Wintun + WinDivert runtimes,
+builds dist\v92isp-windows.exe, configures the firewall, and starts the ISP.
+
+V.92 QUICK CONNECT TEST (after the first build):
+
+  1. Stop an already-running ISP with Ctrl+C.
+  2. Run START-V92-TEST.cmd as Administrator.
+
+This sets MODE=v92 and starts the existing PJSIP executable directly; it does
+not rebuild on every call. Quick Connect is a reconnect procedure. The caller
+must have retained parameters from an earlier successful V.92 connection to
+this server. On a first call, a QC1a timeout and full V.8/V.90 fallback is
+normal.
+
+Defaults:
+  SIP server : 192.168.2.40:5060
+  SIP user   : 101
+  SIP pass   : EMPTY
+  RTP        : PCMU/8000
+  PPP server : 192.168.137.1
+  PPP caller : 192.168.137.2
+  PPP MTU    : 296
+  DNS        : 1.1.1.1 / 8.8.8.8
+
+Internet forwarding prefers the built-in WinDivert NAT, avoiding the Windows
+ICS failure seen on this machine. WinNAT/ICS remains a backup path.
+
+Successful Internet path should show:
+  [PPP] PPP IPv4 is UP...
+  [NAT-TX] FIRST PPP IPv4 packet forwarded to Internet
+  [NAT-RX] FIRST Internet reply returned to PPP peer
+
+Client Disconnect should show:
+  [PPP] peer requested PPP termination
+  [CALL] client PPP disconnect complete; sending SIP BYE to drop carrier
+
+Current real stable modem data path: V.22bis/V.22 transparent async + PPP.
+Full V.90/V.92 56K data mode is NOT implemented yet.

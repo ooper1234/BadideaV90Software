@@ -1,0 +1,14 @@
+v92isp V.90/V.92 fast overlay
+
+Apply this ZIP over the existing v92isp-complete folder from v3.
+It intentionally preserves your already-built .pjprefix/PJSIP and downloaded
+Windows runtime dependencies, so only the changed application sources rebuild.
+
+After overlay:
+  START-V90-TEST.cmd      explicit real V.90 Phase-2 lab
+  START-V92-TEST.cmd      explicit V.92 Quick Connect lab
+  START-STABLE-AUTO.cmd   proven V.22bis/V.22/V.21 path
+
+This is NOT a finished 56K data pump. V.90 currently stops after the real
+Phase-2/ranging milestone and falls back; V.92 currently stops at the
+implemented short-Phase-2 Quick Connect boundary.

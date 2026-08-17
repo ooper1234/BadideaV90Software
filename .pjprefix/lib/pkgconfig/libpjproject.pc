@@ -1,0 +1,14 @@
+# Package Information for pkg-config
+
+prefix=C:/Users/nipit/Downloads/v92isp-complete/.pjprefix
+exec_prefix=${prefix}
+libdir=C:/Users/nipit/Downloads/v92isp-complete/.pjprefix/lib
+includedir=C:/Users/nipit/Downloads/v92isp-complete/.pjprefix/include
+
+Name: libpjproject
+Description: Multimedia communication library
+URL: http://www.pjsip.org
+Version: 2.17
+Libs: -LC:/Users/nipit/Downloads/v92isp-complete/.pjprefix/lib -lpjsua2-x86_64-w64-mingw32 -lstdc++ -lpjsua-x86_64-w64-mingw32 -lpjsip-ua-x86_64-w64-mingw32 -lpjsip-simple-x86_64-w64-mingw32 -lpjsip-x86_64-w64-mingw32 -lpjmedia-codec-x86_64-w64-mingw32 -lpjmedia-videodev-x86_64-w64-mingw32 -lpjmedia-audiodev-x86_64-w64-mingw32 -lpjmedia-x86_64-w64-mingw32 -lpjnath-x86_64-w64-mingw32 -lpjlib-util-x86_64-w64-mingw32 -lpj-x86_64-w64-mingw32
+Libs.private: -lsrtp-x86_64-w64-mingw32 -lresample-x86_64-w64-mingw32 -lgsmcodec-x86_64-w64-mingw32 -lspeex-x86_64-w64-mingw32 -lilbccodec-x86_64-w64-mingw32 -lg7221codec-x86_64-w64-mingw32 -lwebrtc-x86_64-w64-mingw32  -lssl -lcrypto -lm -lwinmm -lole32 -lws2_32 -lwsock32 -lpthread 
+Cflags: -IC:/Users/nipit/Downloads/v92isp-complete/.pjprefix/include -DPJ_AUTOCONF=1  -DPJ_IS_BIG_ENDIAN=0 -DPJ_IS_LITTLE_ENDIAN=1

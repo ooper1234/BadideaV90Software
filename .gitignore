@@ -1,0 +1,14 @@
+/build/
+/build-*/
+*.o
+*.a
+*.so
+*.log
+*.pcap
+*.wav
+*.raw
+*.s16le
+*.pcmu
+.vscode/
+.idea/
+.DS_Store

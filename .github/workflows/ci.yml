@@ -1,0 +1,42 @@
+name: build-and-test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build core without optional SpanDSP
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake pkg-config python3 libssl-dev
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j2
+          ctest --test-dir build --output-on-failure
+          ./build/v92isp-ppp-tun --selftest
+          bash ./scripts/selftest.sh
+          bash ./scripts/selftest-sip.sh
+          bash ./scripts/selftest-register.sh
+          bash ./scripts/selftest-live-v21.sh
+          ./build/v92isp-live --features
+
+  spandsp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with SpanDSP V.8/V.22/V.22bis
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake pkg-config python3 libspandsp-dev libssl-dev
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j2
+          ctest --test-dir build --output-on-failure
+          ./build/v92isp-ppp-tun --selftest
+          ./build/v92isp-live --features | tee features.txt
+          grep -qx 'spandsp-v22=yes' features.txt
+          grep -qx 'stable-auto-v8=yes' features.txt
+          grep -qx 'v42-lapm=yes' features.txt
+          grep -qx 'sip-digest=yes' features.txt
